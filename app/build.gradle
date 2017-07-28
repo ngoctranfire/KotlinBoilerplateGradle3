@@ -1,0 +1,55 @@
+apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+
+android {
+    compileSdkVersion 26
+    buildToolsVersion "26.0.1"
+    defaultConfig {
+        applicationId "com.wakeupngoc.kotlinboilerplate"
+        minSdkVersion 21
+        targetSdkVersion 26
+        versionCode 1
+        versionName "1.0"
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+    }
+    buildTypes {
+        debug {
+            applicationIdSuffix ".debug"
+        }
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+    sourceSets {
+        main.java.srcDirs +='src/main/kotlin'
+    }
+}
+
+kapt {
+    generateStubs = true
+}
+
+dependencies {
+    compile fileTree(dir: 'libs', include: ['*.jar'])
+    androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
+        exclude group: 'com.android.support', module: 'support-annotations'
+    })
+    implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+
+    // Android Components
+    implementation "com.android.support:appcompat-v7:${compatVersion}"
+    implementation "com.android.support:recyclerview-v7:${compatVersion}"
+    implementation "com.android.support.constraint:constraint-layout:${constraintLayoutVersion}"
+
+    // Dagger
+    implementation "com.google.dagger:dagger:${daggerVersion}"
+    kapt "com.google.dagger:dagger-compiler:${daggerVersion}"
+
+    // RXJava
+    implementation "io.reactivex.rxjava2:rxjava:2.1.1"
+
+    //Timber
+    implementation "com.jakewharton.timber:timber:${timberVersion}"
+    testImplementation 'junit:junit:4.12'
+}
