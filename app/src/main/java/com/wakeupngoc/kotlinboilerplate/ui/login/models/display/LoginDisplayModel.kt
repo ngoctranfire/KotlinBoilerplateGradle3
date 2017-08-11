@@ -1,6 +1,6 @@
-package com.wakeupngoc.kotlinboilerplate.ui.main.models.display
+package com.wakeupngoc.kotlinboilerplate.ui.login.models.display
 
-import com.wakeupngoc.kotlinboilerplate.ui.main.state.LoginState
+import com.wakeupngoc.kotlinboilerplate.ui.login.state.LoginState
 
 /**
  * Created by ngoctranfire on 8/10/17.

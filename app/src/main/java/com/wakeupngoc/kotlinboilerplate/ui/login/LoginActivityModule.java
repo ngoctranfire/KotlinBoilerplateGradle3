@@ -1,4 +1,4 @@
-package com.wakeupngoc.kotlinboilerplate.ui.main;
+package com.wakeupngoc.kotlinboilerplate.ui.login;
 
 
 import com.wakeupngoc.kotlinboilerplate.di.scopes.ActScope;
@@ -11,8 +11,8 @@ import dagger.Module;
  */
 
 @Module @ActScope
-abstract public class MainActivityModule {
+abstract public class LoginActivityModule {
 
     @Binds
-    abstract MainVM providesMainVM(MainVMImpl mainVM);
+    abstract LoginVM providesLoginVM(LoginVMImpl loginVM);
 }

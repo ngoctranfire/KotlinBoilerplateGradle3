@@ -1,24 +1,24 @@
-package com.wakeupngoc.kotlinboilerplate.ui.main
+package com.wakeupngoc.kotlinboilerplate.ui.login
 
 import com.wakeupngoc.kotlinboilerplate.services.analytics.Analytics
 import com.wakeupngoc.kotlinboilerplate.states.UserState
 import com.wakeupngoc.kotlinboilerplate.states.datamodel.UserData
-import com.wakeupngoc.kotlinboilerplate.ui.main.models.input.UserLoginInputModel
+import com.wakeupngoc.kotlinboilerplate.ui.login.models.input.UserLoginInputModel
 import io.reactivex.Observable
 import timber.log.Timber
 import javax.inject.Inject
 
-interface MainVM {
+interface LoginVM {
     fun getButtonState(userLoginInputModel: Observable<UserLoginInputModel>): Observable<Boolean>
 }
 
-class MainVMImpl @Inject constructor(
+class LoginVMImpl @Inject constructor(
         private val analytics: Analytics,
         private val userState: UserState
-):MainVM {
+): LoginVM {
 
     init {
-        Timber.d( "Hey I got in here to constructor again, MainVM()!")
+        Timber.d( "Hey I got in here to constructor again, LoginVM()!")
     }
 
     override fun getButtonState(userLoginInputModel: Observable<UserLoginInputModel>): Observable<Boolean> {

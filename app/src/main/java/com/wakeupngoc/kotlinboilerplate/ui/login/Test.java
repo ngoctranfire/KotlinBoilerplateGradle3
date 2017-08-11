@@ -1,6 +1,6 @@
-package com.wakeupngoc.kotlinboilerplate.ui.main;
+package com.wakeupngoc.kotlinboilerplate.ui.login;
 
-import com.wakeupngoc.kotlinboilerplate.ui.main.models.input.UserLoginInputModel;
+import com.wakeupngoc.kotlinboilerplate.ui.login.models.input.UserLoginInputModel;
 
 import io.reactivex.Observable;
 import io.reactivex.ObservableSource;
