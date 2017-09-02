@@ -14,6 +14,9 @@ import dagger.android.HasActivityInjector
 import timber.log.Timber
 import javax.inject.Inject
 import dagger.android.DispatchingAndroidInjector
+import android.os.StrictMode
+
+
 
 /**
  * Created by ngoctranfire on 5/20/17.
@@ -23,13 +26,13 @@ class MainApplication : Application(), HasActivityInjector{
     @Inject lateinit var activityDispatchingAndroidInjector: DispatchingAndroidInjector<Activity>
 
     override fun onCreate() {
+        super.onCreate()
+
         DaggerAppComponent
                 .builder()
                 .app(this)
                 .build()
                 .inject(this)
-
-        super.onCreate()
 
         // LogTree dependent on what environment we are using.
 
@@ -40,6 +43,20 @@ class MainApplication : Application(), HasActivityInjector{
             LeakCanary.install(this)
             Log.d("MainApplication", "Installing leak Canary!")
             Stetho.initializeWithDefaults(this)
+
+            StrictMode.setThreadPolicy(StrictMode.ThreadPolicy.Builder()
+                    .detectDiskReads()
+                    .detectDiskWrites()
+                    .detectNetwork()   // or .detectAll() for all detectable problems
+                    .penaltyLog()
+                    .build())
+
+            StrictMode.setVmPolicy(StrictMode.VmPolicy.Builder()
+                    .detectLeakedSqlLiteObjects()
+                    .detectLeakedClosableObjects()
+                    .penaltyLog()
+                    .penaltyDeath()
+                    .build())
 
         }
 

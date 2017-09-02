@@ -1,6 +1,7 @@
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
 
 android {
     compileSdkVersion 26
@@ -31,6 +32,13 @@ android {
     }
     dexOptions {
         preDexLibraries true
+    }
+    // Configure only for each module that uses Java 8
+    // language features (either in its source code or
+    // through dependencies).
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
     }
 }
 
@@ -82,10 +90,14 @@ dependencies {
     implementation "io.reactivex.rxjava2:rxkotlin:$rxKotlin"
 
     // RxBindings
-    implementation 'com.jakewharton.rxbinding2:rxbinding:2.0.0'
-    implementation 'com.jakewharton.rxbinding2:rxbinding-kotlin:2.0.0x'
-    implementation 'com.jakewharton.rxbinding2:rxbinding-appcompat-v7:2.0.0'
-    implementation 'com.jakewharton.rxbinding2:rxbinding-appcompat-v7-kotlin:2.0.0'
+    implementation "com.jakewharton.rxbinding2:rxbinding:${rxBinding}"
+    implementation "com.jakewharton.rxbinding2:rxbinding-kotlin:${rxBinding}"
+    implementation "com.jakewharton.rxbinding2:rxbinding-appcompat-v7:${rxBinding}"
+    implementation "com.jakewharton.rxbinding2:rxbinding-appcompat-v7-kotlin:${rxBinding}"
+
+    // RxPreferences
+    implementation "com.f2prateek.rx.preferences2:rx-preferences:${rxPrefs}"
+
 
     // Timber
     implementation "com.jakewharton.timber:timber:$timberVersion"

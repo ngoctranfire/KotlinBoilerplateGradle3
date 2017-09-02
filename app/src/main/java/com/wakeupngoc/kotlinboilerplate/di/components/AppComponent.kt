@@ -2,10 +2,7 @@ package com.wakeupngoc.kotlinboilerplate.di.components
 
 import android.app.Application
 import com.wakeupngoc.kotlinboilerplate.app.MainApplication
-import com.wakeupngoc.kotlinboilerplate.di.modules.ActivityBuilderModule
-import com.wakeupngoc.kotlinboilerplate.di.modules.AppModule
-import com.wakeupngoc.kotlinboilerplate.di.modules.AppReportsModule
-import com.wakeupngoc.kotlinboilerplate.di.modules.UserModule
+import com.wakeupngoc.kotlinboilerplate.di.modules.*
 import com.wakeupngoc.kotlinboilerplate.di.scopes.AppScope
 import dagger.BindsInstance
 import dagger.Component
@@ -20,6 +17,7 @@ import dagger.android.AndroidInjectionModule
         AndroidInjectionModule::class,
         AppModule::class,
         AppReportsModule::class,
+        PersistenceModule::class,
         UserModule::class,
         ActivityBuilderModule::class
 ))

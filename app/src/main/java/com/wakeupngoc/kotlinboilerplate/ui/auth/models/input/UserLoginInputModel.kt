@@ -1,4 +1,4 @@
-package com.wakeupngoc.kotlinboilerplate.ui.login.models.input
+package com.wakeupngoc.kotlinboilerplate.ui.auth.models.input
 
 /**
  * Created by ngoctranfire on 8/6/17.

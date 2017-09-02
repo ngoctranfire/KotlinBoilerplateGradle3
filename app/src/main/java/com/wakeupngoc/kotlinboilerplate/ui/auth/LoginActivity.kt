@@ -1,16 +1,19 @@
-package com.wakeupngoc.kotlinboilerplate.ui.login
+package com.wakeupngoc.kotlinboilerplate.ui.auth
 
 import android.os.Bundle
 import com.jakewharton.rxbinding2.widget.RxTextView
 import com.wakeupngoc.kotlinboilerplate.R
 import com.wakeupngoc.kotlinboilerplate.ext.into
+import com.wakeupngoc.kotlinboilerplate.ui.auth.models.display.LoginDisplayState
 import com.wakeupngoc.kotlinboilerplate.ui.base.activity.BaseActivity
-import com.wakeupngoc.kotlinboilerplate.ui.login.models.input.UserLoginInputModel
+import com.wakeupngoc.kotlinboilerplate.ui.auth.models.input.UserLoginInputModel
 import dagger.android.AndroidInjection
 import io.reactivex.Observable
+import io.reactivex.ObservableTransformer
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.functions.BiFunction
+import io.reactivex.rxkotlin.subscribeBy
 import kotlinx.android.synthetic.main.activity_login.*
 import javax.inject.Inject
 
@@ -34,12 +37,11 @@ class LoginActivity : BaseActivity() {
     }
 
     private fun bindButtonState() {
-        val emailObservable: Observable<String> = RxTextView.textChanges(email)
+        val emailObservable: Observable<String> = RxTextView.afterTextChangeEvents(email)
                 .map { email -> email.toString() }
 
-        val passwordObservable: Observable<String> = RxTextView.textChanges(password)
+        val passwordObservable: Observable<String> = RxTextView.afterTextChangeEvents(password)
                 .map { password -> password.toString() }
-
         val userInput: Observable<UserLoginInputModel> = Observable
                 .combineLatest(emailObservable, passwordObservable, BiFunction<CharSequence, CharSequence, UserLoginInputModel> {
                     email, password ->
@@ -47,12 +49,14 @@ class LoginActivity : BaseActivity() {
                         userLoginInputModel
                 })
 
-        vm.getButtonState(userInput)
+
+        vm.getLoginDisplayState(userInput)
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe({
-                    state -> login_button.isEnabled = state
+                .subscribeBy(onNext = {
+                    (btnState) -> login_button.isEnabled = btnState
                 })
                 .into(bin)
+
     }
 
     override fun onDestroy() {

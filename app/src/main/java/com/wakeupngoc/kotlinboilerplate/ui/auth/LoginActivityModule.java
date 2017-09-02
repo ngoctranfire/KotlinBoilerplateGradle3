@@ -1,4 +1,4 @@
-package com.wakeupngoc.kotlinboilerplate.ui.login;
+package com.wakeupngoc.kotlinboilerplate.ui.auth;
 
 
 import com.wakeupngoc.kotlinboilerplate.di.scopes.ActScope;

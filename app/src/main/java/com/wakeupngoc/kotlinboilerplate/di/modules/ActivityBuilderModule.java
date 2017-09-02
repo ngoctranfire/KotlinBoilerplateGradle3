@@ -1,8 +1,8 @@
 package com.wakeupngoc.kotlinboilerplate.di.modules;
 
 import com.wakeupngoc.kotlinboilerplate.di.scopes.AppScope;
-import com.wakeupngoc.kotlinboilerplate.ui.login.LoginActivity;
-import com.wakeupngoc.kotlinboilerplate.ui.login.LoginActivityModule;
+import com.wakeupngoc.kotlinboilerplate.ui.auth.LoginActivity;
+import com.wakeupngoc.kotlinboilerplate.ui.auth.LoginActivityModule;
 
 import dagger.Module;
 
