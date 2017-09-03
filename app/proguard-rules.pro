@@ -30,3 +30,12 @@
 -dontwarn android.arch.persistence.room.paging.LimitOffsetDataSource
 
 -dontwarn com.google.errorprone.annotations.*
+
+# Okhttp Proguard
+-dontwarn okhttp3.**
+-dontwarn okio.**
+-dontwarn javax.annotation.**
+
+# Retrofit Pro-guard
+-dontwarn okio.**
+-dontwarn javax.annotation.**

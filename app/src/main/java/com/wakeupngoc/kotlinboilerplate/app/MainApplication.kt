@@ -16,8 +16,6 @@ import javax.inject.Inject
 import dagger.android.DispatchingAndroidInjector
 import android.os.StrictMode
 
-
-
 /**
  * Created by ngoctranfire on 5/20/17.
  */
@@ -57,7 +55,6 @@ class MainApplication : Application(), HasActivityInjector{
                     .penaltyLog()
                     .penaltyDeath()
                     .build())
-
         }
 
         FirebaseApp.initializeApp(this)

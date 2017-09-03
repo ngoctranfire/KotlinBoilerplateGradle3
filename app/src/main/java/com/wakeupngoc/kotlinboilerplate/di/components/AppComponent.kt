@@ -17,6 +17,7 @@ import dagger.android.AndroidInjectionModule
         AndroidInjectionModule::class,
         AppModule::class,
         AppReportsModule::class,
+        NetworkModule::class,
         PersistenceModule::class,
         UserModule::class,
         ActivityBuilderModule::class
@@ -26,7 +27,6 @@ interface AppComponent {
     @Component.Builder
     interface Builder {
         @BindsInstance fun app(app: Application): Builder
-
         fun build(): AppComponent
     }
 

@@ -60,7 +60,6 @@ dependencies {
     //Firebase Services
     implementation "com.google.firebase:firebase-core:$firebaseVersion"
     implementation "com.google.android.gms:play-services-auth:$firebaseVersion"
-    implementation "com.google.firebase:firebase-auth:$firebaseVersion"
 
     // Kotlin
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlinVersion"
@@ -94,10 +93,13 @@ dependencies {
     implementation "com.jakewharton.rxbinding2:rxbinding-kotlin:${rxBinding}"
     implementation "com.jakewharton.rxbinding2:rxbinding-appcompat-v7:${rxBinding}"
     implementation "com.jakewharton.rxbinding2:rxbinding-appcompat-v7-kotlin:${rxBinding}"
+    implementation "com.squareup.retrofit2:retrofit:$retrofitVersion"
+    implementation "com.squareup.okhttp3:okhttp:$okhttpVersion"
+    implementation "com.squareup.retrofit2:adapter-rxjava2:$rxRetrofitAdapter"
+    implementation "com.google.code.gson:gson:$gsonVersion"
 
     // RxPreferences
     implementation "com.f2prateek.rx.preferences2:rx-preferences:${rxPrefs}"
-
 
     // Timber
     implementation "com.jakewharton.timber:timber:$timberVersion"
