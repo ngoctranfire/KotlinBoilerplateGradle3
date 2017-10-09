@@ -12,7 +12,14 @@ import timber.log.Timber
 /**
  * Created by ngoctranfire on 7/29/17.
  */
-abstract class BaseActivity : AppCompatActivity() {
+abstract class BaseActivity : AppCompatActivity(), LifecycleRegistryOwner {
+    @Suppress("LeakingThis")
+    private val lifecycleRegistry = LifecycleRegistry(this)
+
+    override fun getLifecycle(): LifecycleRegistry {
+        return lifecycleRegistry
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         Timber.d("onCreate, savedInstanceState=%s", savedInstanceState)
