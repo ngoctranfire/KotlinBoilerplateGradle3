@@ -1,8 +1,8 @@
-package com.wakeupngoc.kotlinboilerplate.persistence
+package com.wakeupngoc.kotlinboilerplate.persistence.local.db.tables
 
 import android.arch.persistence.room.*
 import io.reactivex.Flowable
-import java.util.Date
+import java.util.*
 
 /**
  * Created by ngoctranfire on 8/13/17.

@@ -38,7 +38,7 @@ abstract public class AppReportsModule {
         CrashReporter provideCrashReporter(CrashReporter crashReporter);
 
         @Binds @AppScope
-        Analytics provideAnalytics(EventAnalytics eventAnalytics);
+        Analytics provideEventAnalytics(EventAnalytics eventAnalytics);
 
         @Binds @AppScope
         CrashAnalytics provideCrashAnalytics(CrashReporter crashReporter);

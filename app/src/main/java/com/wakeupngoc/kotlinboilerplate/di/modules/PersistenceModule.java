@@ -5,10 +5,11 @@ import android.arch.persistence.room.Room;
 
 import com.wakeupngoc.kotlinboilerplate.R;
 import com.wakeupngoc.kotlinboilerplate.di.scopes.AppScope;
-import com.wakeupngoc.kotlinboilerplate.persistence.db.BoilerplateDB;
+import com.wakeupngoc.kotlinboilerplate.persistence.local.db.BoilerplateDB;
 
 import dagger.Module;
 import dagger.Provides;
+import io.reactivex.annotations.NonNull;
 
 /**
  * Created by ngoctranfire on 8/13/17.

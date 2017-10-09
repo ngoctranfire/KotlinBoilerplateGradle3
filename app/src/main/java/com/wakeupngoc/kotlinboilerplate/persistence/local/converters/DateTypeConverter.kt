@@ -1,4 +1,4 @@
-package com.wakeupngoc.kotlinboilerplate.persistence.converters
+package com.wakeupngoc.kotlinboilerplate.persistence.local.converters
 
 import android.arch.persistence.room.TypeConverter
 import java.util.Date

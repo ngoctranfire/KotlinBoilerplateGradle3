@@ -1,6 +1,6 @@
 package com.wakeupngoc.kotlinboilerplate.states.preauth
 
-import com.wakeupngoc.kotlinboilerplate.persistence.db.BoilerplateDB
+import com.wakeupngoc.kotlinboilerplate.persistence.local.db.BoilerplateDB
 import javax.inject.Inject
 
 /**

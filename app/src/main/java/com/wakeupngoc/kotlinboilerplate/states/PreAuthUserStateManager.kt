@@ -1,9 +1,10 @@
 package com.wakeupngoc.kotlinboilerplate.states
 
-import com.wakeupngoc.kotlinboilerplate.persistence.prefs.UserPrefsManager
+import com.wakeupngoc.kotlinboilerplate.persistence.local.prefs.UserPrefsManager
 import com.wakeupngoc.kotlinboilerplate.states.datamodel.LoginStateData
 import dagger.Reusable
 import io.reactivex.Observable
+import io.reactivex.Single
 import io.reactivex.rxkotlin.subscribeBy
 import io.reactivex.schedulers.Schedulers
 import io.reactivex.subjects.BehaviorSubject
@@ -15,8 +16,9 @@ import javax.inject.Inject
 
 @Reusable
 interface PreAuthUserState {
-    fun updateUserState(loginStateData: LoginStateData)
-    fun getUserState(): Observable<LoginStateData>
+    fun updateLoginStateData(loginStateData: LoginStateData)
+    fun getLoginAttemptCount(): Single<Int>
+    fun getLoginStateData(): Observable<LoginStateData>
 }
 
 @Reusable
@@ -38,6 +40,7 @@ class PreAuthUserStateManager @Inject constructor(private val userPrefsManager: 
 
     private fun bindUserState() {
         loginStateData
+                .serialize()
                 .subscribeOn(Schedulers.io())
                 .observeOn(Schedulers.io())
                 .subscribeBy(onNext = {
@@ -45,12 +48,17 @@ class PreAuthUserStateManager @Inject constructor(private val userPrefsManager: 
                 })
     }
 
-    override fun getUserState(): Observable<LoginStateData> {
+    override fun getLoginStateData(): Observable<LoginStateData> {
         return loginStateData
     }
 
+    override fun getLoginAttemptCount(): Single<Int> {
+        return Single.fromCallable {
+            userPrefsManager.getLoginAttemptCount()
+        }
+    }
 
-    override fun updateUserState(loginStateData: LoginStateData) {
+    override fun updateLoginStateData(loginStateData: LoginStateData) {
         this.loginStateData.onNext(loginStateData)
     }
 

@@ -4,12 +4,21 @@ apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
 
 android {
-    compileSdkVersion 26
-    buildToolsVersion "26.0.1"
+    signingConfigs {
+        config {
+            keyAlias 'hello1'
+            keyPassword 'hello1'
+            storePassword 'hello1'
+            storeFile file('/Users/ngoctranfire/Desktop/keystore/boilerplate.jks')
+        }
+    }
+
+    compileSdkVersion project.compileSdkVersion
+    buildToolsVersion project.buildToolsVersion
     defaultConfig {
         applicationId "com.wakeupngoc.kotlinboilerplate"
-        minSdkVersion 21
-        targetSdkVersion 26
+        minSdkVersion project.minSdkVersion
+        targetSdkVersion project.targetSdkVersion
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
@@ -27,7 +36,6 @@ android {
             minifyEnabled true
             shrinkResources true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-            buildConfigField 'boolean', 'ENABLE_DEBUG', 'true'
         }
     }
     dexOptions {
@@ -47,15 +55,12 @@ kapt {
 }
 
 dependencies {
-    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
 
     // Espresso
     androidTestImplementation("com.android.support.test.espresso:espresso-core:$espressoVersion", {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
-
-    // Debugging Tools
-    implementation "com.facebook.stetho:stetho:$stethoVersion"
 
     //Firebase Services
     implementation "com.google.firebase:firebase-core:$firebaseVersion"
@@ -72,44 +77,51 @@ dependencies {
     implementation "com.android.support.constraint:constraint-layout:$constraintLayoutVersion"
     implementation "com.android.support:recyclerview-v7:$compatVersion"
 
-    // Room
-    implementation "android.arch.persistence.room:runtime:$roomVersion"
-    implementation "android.arch.persistence.room:rxjava2:$roomVersion"
-    kapt "android.arch.persistence.room:compiler:$roomVersion"
+    // Architecture Components
+    implementation "android.arch.lifecycle:runtime:$archCompVersion"
+    implementation "android.arch.lifecycle:extensions:$archCompVersion"
+    kapt "android.arch.lifecycle:compiler:$archCompVersion"
+    implementation "android.arch.persistence.room:runtime:$archCompVersion"
+    implementation "android.arch.persistence.room:rxjava2:$archCompVersion"
+    kapt "android.arch.persistence.room:compiler:$archCompVersion"
 
     // Dagger
     implementation "com.google.dagger:dagger:$daggerVersion"
     kapt "com.google.dagger:dagger-compiler:$daggerVersion"
     implementation "com.google.dagger:dagger-android-support:$daggerVersion"
-    kapt"com.google.dagger:dagger-android-processor:$daggerVersion"
+    kapt "com.google.dagger:dagger-android-processor:$daggerVersion"
 
     // RXJava
     implementation "io.reactivex.rxjava2:rxjava:$rxJava2Version"
-    implementation "io.reactivex.rxjava2:rxandroid:$rxAndroid"
-    implementation "io.reactivex.rxjava2:rxkotlin:$rxKotlin"
+    implementation "io.reactivex.rxjava2:rxandroid:$rxAndroidVersion"
+    implementation "io.reactivex.rxjava2:rxkotlin:$rxKotlinVersion"
 
     // RxBindings
-    implementation "com.jakewharton.rxbinding2:rxbinding:${rxBinding}"
-    implementation "com.jakewharton.rxbinding2:rxbinding-kotlin:${rxBinding}"
-    implementation "com.jakewharton.rxbinding2:rxbinding-appcompat-v7:${rxBinding}"
-    implementation "com.jakewharton.rxbinding2:rxbinding-appcompat-v7-kotlin:${rxBinding}"
-    implementation "com.squareup.retrofit2:retrofit:$retrofitVersion"
+    implementation "com.jakewharton.rxbinding2:rxbinding:$rxBindingVersion"
+    implementation "com.jakewharton.rxbinding2:rxbinding-kotlin:$rxBindingVersion"
+    implementation "com.jakewharton.rxbinding2:rxbinding-appcompat-v7:$rxBindingVersion"
+    implementation "com.jakewharton.rxbinding2:rxbinding-appcompat-v7-kotlin:$rxBindingVersion"
+
+    // Network
     implementation "com.squareup.okhttp3:okhttp:$okhttpVersion"
-    implementation "com.squareup.retrofit2:adapter-rxjava2:$rxRetrofitAdapter"
+    implementation "com.squareup.retrofit2:retrofit:$retrofitVersion"
+    debugImplementation "com.squareup.okhttp3:logging-interceptor:$okhttpVersion"
+    implementation "com.squareup.retrofit2:adapter-rxjava2:$retrofitVersion"
     implementation "com.google.code.gson:gson:$gsonVersion"
+    implementation "com.squareup.retrofit2:converter-gson:$retrofitVersion"
 
     // RxPreferences
-    implementation "com.f2prateek.rx.preferences2:rx-preferences:${rxPrefs}"
+    implementation "com.f2prateek.rx.preferences2:rx-preferences:$rxPrefsVersion"
 
     // Timber
     implementation "com.jakewharton.timber:timber:$timberVersion"
 
     // Leak Canary
     debugImplementation "com.squareup.leakcanary:leakcanary-android:$leakCanaryVersion"
-
+    releaseImplementation "com.squareup.leakcanary:leakcanary-android-no-op:$leakCanaryVersion"
 
     // JUnit
-    testImplementation "junit:junit:${junitVersion}"
+    testImplementation "junit:junit:$junitVersion"
 }
 
 // Google Services needs to be applied at the bottom

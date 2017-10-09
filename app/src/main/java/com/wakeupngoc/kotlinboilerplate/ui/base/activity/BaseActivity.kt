@@ -1,5 +1,8 @@
 package com.wakeupngoc.kotlinboilerplate.ui.base.activity
 
+import android.arch.lifecycle.LifecycleRegistryOwner
+import android.arch.lifecycle.LifecycleRegistry
+
 import android.content.Intent
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity

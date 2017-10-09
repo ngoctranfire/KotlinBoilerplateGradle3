@@ -62,8 +62,8 @@
 
     <android.support.v7.widget.AppCompatButton
         style="@style/Widget.AppCompat.Button.Colored"
-        android:background="@drawable/login_btn"
         android:id="@+id/login_button"
+        android:background="@drawable/login_btn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/login_btn_margin_top"
@@ -71,6 +71,18 @@
         android:enabled="false"
         app:layout_constraintTop_toBottomOf="@id/password_input_layout"
     />
+
+    <android.support.v7.widget.AppCompatTextView
+        android:id="@+id/auth_error"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/login_btn_margin_top"
+        android:textAlignment="center"
+        android:textColor="@color/error"
+        android:text="@string/authentication_error"
+        android:visibility="gone"
+        android:contentDescription="@string/authentication_error"
+        app:layout_constraintTop_toBottomOf="@id/login_button"/>
 
 
 </android.support.constraint.ConstraintLayout>

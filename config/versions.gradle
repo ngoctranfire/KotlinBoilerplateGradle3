@@ -1,21 +1,34 @@
 project.ext {
-    compatVersion = '26.0.2'
+    // Android Configurations
+    minSdkVersion = 21
+    targetSdkVersion = 26
+    compileSdkVersion = 26
+    buildToolsVersion = '26.0.2'
+
+
+    // Root Level Build.gradle
+    firebasePluginsVersion = '1.1.1'
+    googleServicesVersion = '3.1.0'
+    gradleVersion = '3.0.0-beta7'
+    kotlinVersion = '1.1.51'
+
+    // App level requirements.
+    archCompVersion = "1.0.0-alpha9-1"
+    compatVersion = '26.1.0'
     constraintLayoutVersion = '1.0.2'
     daggerVersion = '2.11'
     espressoVersion = '3.0.0'
-    rxJava2Version = '2.1.2'
-    rxKotlin = '2.1.0'
-    rxAndroid = '2.0.1'
-    rxBinding = '2.0.0'
-    rxPrefs = '2.0.0-RC2'
-    rxRetrofitAdapter = '2.3.0'
-    roomVersion = "1.0.0-alpha9"
-    okhttpVersion = "3.8.1"
-    retrofitVersion = '2.3.0'
+    firebaseVersion = '11.4.2'
     gsonVersion = '2.8.1'
-    timberVersion = '4.5.1'
     junitVersion = '4.12'
-    firebaseVersion = '11.2.0'
-    stethoVersion = '1.5.0'
     leakCanaryVersion = '1.5.2'
+    okhttpVersion = "3.8.1"
+    stethoVersion = '1.5.0'
+    retrofitVersion = '2.3.0'
+    rxAndroidVersion = '2.0.1'
+    rxBindingVersion = '2.0.0'
+    rxJava2Version = '2.1.2'
+    rxKotlinVersion = '2.1.0'
+    rxPrefsVersion = '2.0.0-RC2'
+    timberVersion = '4.5.1'
 }

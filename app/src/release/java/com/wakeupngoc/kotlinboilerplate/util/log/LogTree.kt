@@ -1,4 +1,4 @@
-package com.wakeupngoc.boilerplate.logs
+package com.wakeupngoc.kotlinboilerplate.util.log
 
 import android.util.Log
 import timber.log.Timber

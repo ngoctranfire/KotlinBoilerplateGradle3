@@ -20,7 +20,8 @@ import dagger.android.AndroidInjectionModule
         NetworkModule::class,
         PersistenceModule::class,
         UserModule::class,
-        ActivityBuilderModule::class
+        ActivityBuilderModule::class,
+        ViewModelModule::class
 ))
 interface AppComponent {
 

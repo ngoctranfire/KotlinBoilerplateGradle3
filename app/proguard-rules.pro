@@ -33,9 +33,9 @@
 
 # Okhttp Proguard
 -dontwarn okhttp3.**
--dontwarn okio.**
 -dontwarn javax.annotation.**
 
 # Retrofit Pro-guard
 -dontwarn okio.**
+-dontwarn retrofit2.Platform$Java8
 -dontwarn javax.annotation.**

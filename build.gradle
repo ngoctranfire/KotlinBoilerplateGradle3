@@ -6,12 +6,8 @@ repositories {
 }
 
 buildscript {
-    ext {
-        kotlinVersion = '1.1.4-2'
-        gradleVersion = '3.0.0-beta4'
-        googleServicesVersion = '3.1.0'
-        firebasePluginsVersion = '1.1.1'
-    }
+    apply from: 'config/versions.gradle'
+
     repositories {
         maven { url 'https://maven.google.com' }
         jcenter()

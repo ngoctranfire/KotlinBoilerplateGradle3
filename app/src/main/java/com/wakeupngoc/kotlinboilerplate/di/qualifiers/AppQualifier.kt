@@ -11,4 +11,4 @@ import kotlin.annotation.Retention
 
 @Qualifier
 @Retention(AnnotationRetention.RUNTIME)
-annotation class AppSharedPreferences
+annotation class AppQualifier
