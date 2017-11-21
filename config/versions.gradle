@@ -9,11 +9,11 @@ project.ext {
     // Root Level Build.gradle
     firebasePluginsVersion = '1.1.1'
     googleServicesVersion = '3.1.0'
-    gradleVersion = '3.0.0-beta7'
+    gradleVersion = '3.0.1'
     kotlinVersion = '1.1.51'
 
     // App level requirements.
-    archCompVersion = "1.0.0-alpha9-1"
+    archCompVersion = "1.0.0"
     compatVersion = '26.1.0'
     constraintLayoutVersion = '1.0.2'
     daggerVersion = '2.11'

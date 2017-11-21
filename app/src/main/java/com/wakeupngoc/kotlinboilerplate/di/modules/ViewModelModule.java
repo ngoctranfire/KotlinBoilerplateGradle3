@@ -1,11 +1,12 @@
 package com.wakeupngoc.kotlinboilerplate.di.modules;
 
+
 import android.arch.lifecycle.ViewModel;
 import android.arch.lifecycle.ViewModelProvider;
 
 import com.wakeupngoc.kotlinboilerplate.di.multibinding.key.ViewModelKey;
-import com.wakeupngoc.kotlinboilerplate.ui.auth.LoginVMImpl;
-import com.wakeupngoc.kotlinboilerplate.ui.base.viewmodel.ViewModelFactory;
+import com.wakeupngoc.kotlinboilerplate.ui.auth.viewmodel.LoginViewModel;
+import com.wakeupngoc.kotlinboilerplate.ui.base.viewmodel.BoilerplateViewModelFactory;
 
 import dagger.Binds;
 import dagger.Module;
@@ -19,10 +20,10 @@ public abstract class ViewModelModule {
 
     @Binds
     @IntoMap
-    @ViewModelKey(LoginVMImpl.class)
-    abstract ViewModel bindUserViewModel(LoginVMImpl loginVM);
+    @ViewModelKey(LoginViewModel.class)
+    abstract ViewModel bindUserViewModel(LoginViewModel loginVM);
 
     @Binds
-    abstract ViewModelProvider.Factory bindViewModelFactory(ViewModelFactory factory);
+    abstract ViewModelProvider.Factory bindBoilerplateViewModelFactory(BoilerplateViewModelFactory factory);
 
 }

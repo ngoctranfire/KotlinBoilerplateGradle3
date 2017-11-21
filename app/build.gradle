@@ -84,6 +84,7 @@ dependencies {
     implementation "android.arch.persistence.room:runtime:$archCompVersion"
     implementation "android.arch.persistence.room:rxjava2:$archCompVersion"
     kapt "android.arch.persistence.room:compiler:$archCompVersion"
+    implementation "android.arch.lifecycle:extensions:$archCompVersion"
 
     // Dagger
     implementation "com.google.dagger:dagger:$daggerVersion"

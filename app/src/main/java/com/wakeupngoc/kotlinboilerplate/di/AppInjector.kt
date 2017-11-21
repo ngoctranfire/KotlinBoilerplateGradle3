@@ -3,44 +3,64 @@ package com.wakeupngoc.kotlinboilerplate.di
 import android.app.Activity
 import android.app.Application
 import android.os.Bundle
-import com.wakeupngoc.kotlinboilerplate.app.MainApplication
-import com.wakeupngoc.kotlinboilerplate.di.components.AppComponent
-import com.wakeupngoc.kotlinboilerplate.di.components.DaggerAppComponent
-import com.wakeupngoc.kotlinboilerplate.ui.base.activity.BaseActivity
-import dagger.android.AndroidInjection
+import android.support.v4.app.Fragment
+import android.support.v4.app.FragmentActivity
+import android.support.v4.app.FragmentManager
 
+import com.wakeupngoc.kotlinboilerplate.app.MainApplication
+import com.wakeupngoc.kotlinboilerplate.di.components.DaggerAppComponent
+
+import dagger.android.AndroidInjection
+import dagger.android.support.AndroidSupportInjection
+import dagger.android.support.HasSupportFragmentInjector
 
 /**
- * Created by ngoctranfire on 9/7/17.
+ * Created by ngoctranfire on 11/9/17.
  */
+
 object AppInjector {
-
-    fun initialize(app: MainApplication) {
-        val appComponent: AppComponent = DaggerAppComponent
+    fun init(mainApplication: MainApplication) {
+        DaggerAppComponent
                 .builder()
-                .app(app)
+                .app(mainApplication)
                 .build()
-
-        appComponent.inject(app)
-
-        app.registerActivityLifecycleCallbacks(object: Application.ActivityLifecycleCallbacks {
-            override fun onActivityCreated(activity: Activity?, bundle: Bundle?) {
-                handleActivityInjection(activity!!)
-            }
-            override fun onActivityStarted(activity: Activity?) {}
-            override fun onActivityResumed(activity: Activity?) {}
-            override fun onActivityPaused(activity: Activity?) {}
-            override fun onActivitySaveInstanceState(activity: Activity?, bundle: Bundle?) {}
-            override fun onActivityStopped(activity: Activity?) {}
-            override fun onActivityDestroyed(activity: Activity?) {}
-        })
+                .inject(mainApplication)
+        mainApplication.registerActivityLifecycleCallbacks(AppLifecycleCallbacks())
     }
 
-    private fun handleActivityInjection(activity: Activity) {
-        if (activity is BaseActivity) {
+    private fun handleActivity(activity: Activity) {
+        if (activity is HasSupportFragmentInjector) {
             AndroidInjection.inject(activity)
-        } else {
-            throw IllegalStateException(" Cannot inject an activity that is not an instance of the Base Activity")
         }
+        (activity as? FragmentActivity)?.supportFragmentManager?.registerFragmentLifecycleCallbacks(
+                object : FragmentManager.FragmentLifecycleCallbacks() {
+                    override fun onFragmentCreated(fm: FragmentManager?, f: Fragment?, savedInstanceState: Bundle?) {
+                        super.onFragmentCreated(fm, f, savedInstanceState)
+                        if (f is Injectable) {
+                            AndroidSupportInjection.inject(f)
+                        }
+                    }
+                }, true)
+    }
+
+    class AppLifecycleCallbacks: Application.ActivityLifecycleCallbacks {
+
+
+        override fun onActivityCreated(activity: Activity, savedInstanceState: Bundle?) {
+            handleActivity(activity)
+        }
+
+        override fun onActivityStarted(activity: Activity) {}
+
+        override fun onActivityResumed(activity: Activity) {}
+
+        override fun onActivityPaused(activity: Activity) {}
+
+        override fun onActivityStopped(activity: Activity) {}
+
+        override fun onActivitySaveInstanceState(activity: Activity, outState: Bundle?) {}
+
+        override fun onActivityDestroyed(activity: Activity) {}
+
     }
 }

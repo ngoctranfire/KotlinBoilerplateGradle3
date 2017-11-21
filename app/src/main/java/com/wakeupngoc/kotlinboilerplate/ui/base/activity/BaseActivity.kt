@@ -1,24 +1,21 @@
 package com.wakeupngoc.kotlinboilerplate.ui.base.activity
 
-import android.arch.lifecycle.LifecycleRegistryOwner
-import android.arch.lifecycle.LifecycleRegistry
-
 import android.content.Intent
 import android.os.Bundle
+import android.support.v4.app.Fragment
 import android.support.v7.app.AppCompatActivity
 import android.view.Menu
+import dagger.android.AndroidInjector
+import dagger.android.DispatchingAndroidInjector
+import dagger.android.support.HasSupportFragmentInjector
 import timber.log.Timber
+import javax.inject.Inject
 
 /**
  * Created by ngoctranfire on 7/29/17.
  */
-abstract class BaseActivity : AppCompatActivity(), LifecycleRegistryOwner {
-    @Suppress("LeakingThis")
-    private val lifecycleRegistry = LifecycleRegistry(this)
-
-    override fun getLifecycle(): LifecycleRegistry {
-        return lifecycleRegistry
-    }
+abstract class BaseActivity : AppCompatActivity(), HasSupportFragmentInjector {
+    @Inject lateinit var dispatchingAndroidInjector: DispatchingAndroidInjector<Fragment>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -26,13 +23,13 @@ abstract class BaseActivity : AppCompatActivity(), LifecycleRegistryOwner {
     }
 
     override fun onAttachedToWindow() {
-        super.onAttachedToWindow()
         Timber.d("onAttachedToWindow")
+        super.onAttachedToWindow()
     }
 
     override fun onActivityReenter(resultCode: Int, data: Intent?) {
-        super.onActivityReenter(resultCode, data)
         Timber.d("onActivityReenter, resultCode=%d, data=%s", resultCode, data)
+        super.onActivityReenter(resultCode, data)
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -41,53 +38,56 @@ abstract class BaseActivity : AppCompatActivity(), LifecycleRegistryOwner {
     }
 
     override fun onPostCreate(savedInstanceState: Bundle?) {
-        super.onPostCreate(savedInstanceState)
         Timber.d("onPostCreate, savedInstanceState=%s", savedInstanceState)
+        super.onPostCreate(savedInstanceState)
     }
 
     override fun onSaveInstanceState(outState: Bundle?) {
-        super.onSaveInstanceState(outState)
         Timber.d("onSaveInsaneState, outState=%s", outState)
+        super.onSaveInstanceState(outState)
     }
 
     override fun onPause() {
-        super.onPause()
         Timber.d("onPause")
+        super.onPause()
     }
 
     override fun onRestoreInstanceState(savedInstanceState: Bundle?) {
-        super.onRestoreInstanceState(savedInstanceState)
         Timber.d("onRestoreInstanceState, savedInstanceState=%s", savedInstanceState)
+        super.onRestoreInstanceState(savedInstanceState)
     }
 
     override fun onResumeFragments() {
-        super.onResumeFragments()
         Timber.d("onResumeFragments")
+        super.onResumeFragments()
     }
 
     override fun onResume() {
-        super.onResume()
         Timber.d("onResume")
+        super.onResume()
     }
 
     override fun onDetachedFromWindow() {
-        super.onDetachedFromWindow()
         Timber.d("onDetachedFromWindow")
+        super.onDetachedFromWindow()
     }
     
     override fun onStop() {
-        super.onStop()
         Timber.d("onStop")
+        super.onStop()
     }
 
     override fun onRestart() {
-        super.onRestart()
         Timber.d("onRestart")
+        super.onRestart()
     }
 
     override fun onDestroy() {
-        super.onDestroy()
         Timber.d("onDestroy")
+        super.onDestroy()
     }
 
+    override fun supportFragmentInjector(): AndroidInjector<Fragment> {
+        return dispatchingAndroidInjector
+    }
 }

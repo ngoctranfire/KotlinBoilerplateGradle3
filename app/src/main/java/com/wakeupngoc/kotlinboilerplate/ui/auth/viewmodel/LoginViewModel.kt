@@ -1,6 +1,5 @@
-package com.wakeupngoc.kotlinboilerplate.ui.auth
+package com.wakeupngoc.kotlinboilerplate.ui.auth.viewmodel
 
-import android.arch.lifecycle.ViewModel
 import com.wakeupngoc.kotlinboilerplate.constants.AuthStrategy
 import com.wakeupngoc.kotlinboilerplate.definitions.auth.LoginState
 import com.wakeupngoc.kotlinboilerplate.persistence.remote.service.AuthService
@@ -23,20 +22,16 @@ import timber.log.Timber
 import java.util.concurrent.TimeUnit
 import javax.inject.Inject
 
-abstract class LoginVM : ViewModel() {
-    abstract fun getLoginDisplayState(action: Observable<Action>): Observable<LoginDisplayState>
-    abstract fun getLastInputEmail(): Single<String>
-}
 
-class LoginVMImpl @Inject constructor(
+class LoginViewModel @Inject constructor(
         private val timeOperations: TimeOperations,
         private val analytics: Analytics,
         private val preAuthUserState: PreAuthUserState,
         private val authService: AuthService
-): LoginVM(){
+): LoginVM() {
 
     init {
-        Timber.d("LoginVMImpl initialized")
+        Timber.d("LoginViewModel initialized")
     }
 
 

@@ -2,6 +2,9 @@ package com.wakeupngoc.kotlinboilerplate.ui.base.viewmodel;
 
 import android.arch.lifecycle.ViewModel;
 import android.arch.lifecycle.ViewModelProvider;
+import android.support.annotation.NonNull;
+
+import com.wakeupngoc.kotlinboilerplate.di.scopes.AppScope;
 
 import java.util.Map;
 
@@ -9,19 +12,20 @@ import javax.inject.Inject;
 import javax.inject.Provider;
 
 /**
- * Created by ngoctranfire on 10/8/17.
+ * Created by ngoctranfire on 11/9/17.
  */
-
-public class ViewModelFactory implements ViewModelProvider.Factory {
+@AppScope
+public class BoilerplateViewModelFactory implements ViewModelProvider.Factory {
     private final Map<Class<? extends ViewModel>, Provider<ViewModel>> creators;
 
     @Inject
-    public ViewModelFactory(Map<Class<? extends ViewModel>, Provider<ViewModel>> creators) {
+    public BoilerplateViewModelFactory(Map<Class<? extends ViewModel>, Provider<ViewModel>> creators) {
         this.creators = creators;
     }
+
     @SuppressWarnings("unchecked")
     @Override
-    public <T extends ViewModel> T create(Class<T> modelClass) {
+    public <T extends ViewModel> T create(@NonNull Class<T> modelClass) {
         Provider<? extends ViewModel> creator = creators.get(modelClass);
         if (creator == null) {
             for (Map.Entry<Class<? extends ViewModel>, Provider<ViewModel>> entry : creators.entrySet()) {
@@ -40,7 +44,4 @@ public class ViewModelFactory implements ViewModelProvider.Factory {
             throw new RuntimeException(e);
         }
     }
-
-
-
 }

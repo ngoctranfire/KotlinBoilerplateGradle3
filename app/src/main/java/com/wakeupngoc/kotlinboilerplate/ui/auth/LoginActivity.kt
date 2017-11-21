@@ -1,5 +1,6 @@
 package com.wakeupngoc.kotlinboilerplate.ui.auth
 
+import android.arch.lifecycle.ViewModelProvider
 import android.arch.lifecycle.ViewModelProviders
 import android.os.Bundle
 import android.support.annotation.UiThread
@@ -12,9 +13,9 @@ import com.wakeupngoc.kotlinboilerplate.definitions.auth.LoginState
 import com.wakeupngoc.kotlinboilerplate.ext.into
 import com.wakeupngoc.kotlinboilerplate.ui.auth.models.actions.LoginInputAction
 import com.wakeupngoc.kotlinboilerplate.ui.auth.models.actions.SubmitAction
+import com.wakeupngoc.kotlinboilerplate.ui.auth.viewmodel.LoginViewModel
 import com.wakeupngoc.kotlinboilerplate.ui.base.activity.BaseActivity
 import com.wakeupngoc.kotlinboilerplate.ui.base.actions.Action
-import com.wakeupngoc.kotlinboilerplate.ui.base.viewmodel.ViewModelFactory
 import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
@@ -25,19 +26,21 @@ import javax.inject.Inject
 
 class LoginActivity : BaseActivity() {
 
-    @Inject lateinit var viewModelFactory: ViewModelFactory
-    lateinit var loginVM: LoginVM
+    lateinit var loginVM: LoginViewModel
+    @Inject lateinit var vmFactory: ViewModelProvider.Factory
 
     private val bin: CompositeDisposable by lazy { CompositeDisposable() }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
+
+        // Injections must happen after so we are guaranteed to have config component injected!
+        loginVM = ViewModelProviders.of(this, vmFactory).get(LoginViewModel::class.java)
         bindVM()
     }
 
     private fun bindVM() {
-        loginVM = ViewModelProviders.of(this, viewModelFactory).get(LoginVMImpl::class.java)
 
         loginVM.getLastInputEmail().subscribeBy(onSuccess= { lastEmail ->
             email.setText(lastEmail)

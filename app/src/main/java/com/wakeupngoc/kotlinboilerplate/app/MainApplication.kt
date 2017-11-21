@@ -6,26 +6,25 @@ import android.util.Log
 import com.google.firebase.FirebaseApp
 import com.squareup.leakcanary.LeakCanary
 import com.wakeupngoc.kotlinboilerplate.BuildConfig
-import dagger.android.AndroidInjector
-import dagger.android.HasActivityInjector
 import timber.log.Timber
-import javax.inject.Inject
-import dagger.android.DispatchingAndroidInjector
 import android.os.StrictMode
 import com.wakeupngoc.kotlinboilerplate.di.AppInjector
 import com.wakeupngoc.kotlinboilerplate.util.log.LogTree
+import dagger.android.AndroidInjector
+import dagger.android.DispatchingAndroidInjector
+import dagger.android.HasActivityInjector
+import javax.inject.Inject
 
 /**
  * Created by ngoctranfire on 5/20/17.
  */
 class MainApplication : Application(), HasActivityInjector {
-
-    @Inject lateinit var activityDispatchingAndroidInjector: DispatchingAndroidInjector<Activity>
+    @Inject lateinit var dispatchingAndroidInjector: DispatchingAndroidInjector<Activity>
 
     override fun onCreate() {
         super.onCreate()
 
-        AppInjector.initialize(this)
+        AppInjector.init(this)
 
 //         com.wakeupngoc.kotlinboilerplate.util.log.LogTree dependent on what environment we are using.
 
@@ -58,7 +57,7 @@ class MainApplication : Application(), HasActivityInjector {
     }
 
     override fun activityInjector(): AndroidInjector<Activity> {
-        return activityDispatchingAndroidInjector
+        return dispatchingAndroidInjector
     }
 
 }

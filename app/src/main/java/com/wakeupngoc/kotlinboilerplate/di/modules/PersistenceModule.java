@@ -9,7 +9,6 @@ import com.wakeupngoc.kotlinboilerplate.persistence.local.db.BoilerplateDB;
 
 import dagger.Module;
 import dagger.Provides;
-import io.reactivex.annotations.NonNull;
 
 /**
  * Created by ngoctranfire on 8/13/17.

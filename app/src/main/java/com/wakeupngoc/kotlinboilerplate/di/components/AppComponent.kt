@@ -4,9 +4,10 @@ import android.app.Application
 import com.wakeupngoc.kotlinboilerplate.app.MainApplication
 import com.wakeupngoc.kotlinboilerplate.di.modules.*
 import com.wakeupngoc.kotlinboilerplate.di.scopes.AppScope
+import com.wakeupngoc.kotlinboilerplate.ui.base.activity.BaseActivity
 import dagger.BindsInstance
 import dagger.Component
-import dagger.android.AndroidInjectionModule
+import dagger.android.support.AndroidSupportInjectionModule
 
 /**
  * Created by ngoctranfire on 5/17/17.
@@ -14,14 +15,14 @@ import dagger.android.AndroidInjectionModule
 
 @AppScope
 @Component(modules = arrayOf(
-        AndroidInjectionModule::class,
         AppModule::class,
         AppReportsModule::class,
         NetworkModule::class,
         PersistenceModule::class,
         UserModule::class,
-        ActivityBuilderModule::class,
-        ViewModelModule::class
+        ViewModelModule::class,
+        AndroidSupportInjectionModule::class,
+        ActivityModule::class
 ))
 interface AppComponent {
 
@@ -32,4 +33,7 @@ interface AppComponent {
     }
 
     fun inject(app: MainApplication)
+
+    // Activities Injected
+    fun inject(baseActivity: BaseActivity)
 }
